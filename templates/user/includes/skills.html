@@ -1,0 +1,44 @@
+
+<div class="px-5 my-3">
+    <div class="accordion" id="skillsAccordion">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="setSkillsHeading">
+                <button class="accordion-button collapsed text-uppercase" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#setSkills" aria-expanded="false" aria-controls="setSkills">
+                    Set Skills
+                    <i class="fa fa-question-circle question-icon" id="skillTooltipTrigger"></i>
+                </button>
+            </h2>
+            <div id="setSkills" class="accordion-collapse collapse" aria-labelledby="setSkillsHeading">
+                <div class="accordion-body py-5">
+                    <div class="skills-grid">
+                        <!-- Skill Toggles -->
+                        {% for skill in skills %}
+                        <div class="toggle-item">
+                                <form action="/update_skills" method="post" class="skill_status_form">
+                                <h6>{{ skill.name }}</h6>
+                                    {% if skill.status == "ON" %}
+                                        <div class="toggle-container toggle-active">
+                                            <div class="toggle-switch">ON</div>
+                                        </div>
+                                    {% else %}
+                                        <div class="toggle-container">
+                                            <div class="toggle-switch">OFF</div>
+                                        </div>
+                                    {% endif %}
+                                <input type="hidden" class="" name="skill" id="skill_{{ skill.id }}" value="{{ skill.name }}">
+                                <input type="hidden" class="skill_status" name="status" id="{{ skill.name }}" value="{{ skill.status }}">
+                            </form>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+     <!-- Tooltip -->
+     <div class="tooltip-box" id="skillTooltipBox">
+        <h6>How to Use Skills:</h6>
+        <p>Toggle the settings for customization. Add your intro and important links, then save your changes.</p>
+    </div>
+</div>

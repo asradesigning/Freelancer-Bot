@@ -1,0 +1,54 @@
+{% extends "user/layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %}
+
+{% block stylesheet %}{% endblock stylesheet %}
+
+{% block content %}
+<div class="px-5 mt-5 mb-3">
+<div class="bidding-box">
+    <div class="bidding-content">
+        <!-- First Column -->
+        <div class="bidding-left-column">
+            <h2 class="bidding-heading">WELCOME TO BIDDING BOT</h2>
+            <p class="bidding-paragraph">WE ARE PROVIDING YOU EASY TO USE BIDDING SERVICES FOR YOUR ACCOUNT. ITS EASY TO USE, GENERATE HUMAN LIKE PROPOSALS, FAST AND DISCOUNTED PRICE.</p>
+            <form action="/bidding" method="post">
+                {% if bidding.is_bidding == "bidding" %}
+                <button name="bidding" class="start-bid-btn">Stop Bidding</button>
+                {% elif bidding.is_bidding == "stopped" %}
+                <button type="button" name="bidding" class="start-bid-btn">Start Bid Now</button>
+                {% endif %}
+                <input type="hidden" name="status" id="bidding_status" value="{{ bidding.is_bidding }}">
+            </form>
+            <p class="bidding-note">Bidding bot will place bid every 1 minute.</p>
+        </div>
+
+        <!-- Second Column -->
+        <div class="bidding-right-column">
+            <div class="bidding-stat">
+                <div class="bidding-circle">
+                    <span class="bidding-number">120</span>
+                </div>
+                <p class="bidding-text">Total Bids Placed</p>
+            </div>
+            <div class="bidding-stat">
+                <div class="bidding-circle">
+                    <span class="bidding-number">80</span>
+                </div>
+                <p class="bidding-text">Bid placed within 24 hours</p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+{% include 'user/includes/customize.html' %}
+
+{% include 'user/includes/skills.html' %}
+
+{% include 'user/includes/prices.html' %}
+
+{% include 'user/includes/proposals.html' %}
+
+
+{% endblock content %}

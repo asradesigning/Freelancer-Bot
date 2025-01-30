@@ -1,0 +1,576 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+    font-family: "Lato", serif;
+}
+
+.user-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 15px;
+    border: 2px solid #dfdfdf;
+    border-radius: 20px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+
+.user-box img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.hamburger {
+    font-size: 20px;
+    color: #01D0F5;
+    cursor: pointer;
+}
+
+/* .user-box:hover {
+    background-color: #01D0F5;
+    color: #fff;
+} */
+
+.table-container {
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.table-container h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    font-family: "Raleway", serif;
+    color: #494949;
+    padding-left: 40px;
+}
+
+.table thead th {
+    color: #B4B4B4;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    padding-left: 50px;
+}
+
+.table-border {
+    border-bottom: 1px solid #EAEAEA;
+    margin-bottom: 10px;
+}
+
+.client-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.client-info img {
+    width: 20px;
+    height: 15px;
+    object-fit: cover;
+}
+.star {
+    color: #FFC107; /* Yellow for the star */
+    font-size: 1rem;
+}
+
+.icon-dashboard {
+    font-size: 0.9rem;
+    color: #7C4AF9;
+}
+
+.amount {
+    font-weight: 600;
+}
+
+
+
+.table th, .table td {
+    font-family: "Lato", serif;
+    color: #494949;
+    font-weight: bold;
+    padding-left: 50px;
+    line-height: 40px;
+    vertical-align: middle;
+    border: none;
+    border-top:1px solid  #EAEAEA;
+}
+
+.table th{
+    border: none;
+}
+
+.p-title{
+    max-width: 350px;
+    color: #7C4AF9 !important;
+}
+
+.accordion{
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.accordion-body h6{
+    color: #A3AAB8 ;
+}
+
+.accordion-item{
+    border: none;
+}
+
+
+.accordion-header {
+    background-color: #FCFCFC;
+}
+
+.accordion-button {
+    background-color: #ffffff !important;
+    font-family: "Raleway", serif;
+    font-weight: bold;
+    color: #494949;
+}
+
+.accordion-button:not(.collapsed){
+    color: #494949 ;
+}
+
+.accordion-button:not(.collapsed)::after {
+    background: linear-gradient(to bottom, #7C4AF9, #572DBE);
+    -webkit-mask: url("../assets/accordianIcon.svg") no-repeat center;
+    mask: url("../assets/accordianIcon.svg") no-repeat center;
+    transform: rotate(0deg);
+}
+
+.accordion-button::after {
+    background: linear-gradient(to bottom, #7C4AF9, #572DBE);
+    -webkit-mask: url("../assets/accordianIcon.svg") no-repeat center;
+    mask: url("../assets/accordianIcon.svg") no-repeat center;
+    transform: rotate(180deg);
+}
+
+.on-btn,
+.off-btn {
+    border: none;
+    padding: 8px 20px;
+    border-radius: 8px; /* Reduced roundness */
+    cursor: pointer;
+    font-size: 14px;
+    font-family: "Lato", serif;
+    font-weight: bold;
+}
+
+
+.on-btn {
+    background: #B4B4B4;
+    color: white;
+}
+
+.off-btn {
+    background: #B4B4B4;
+    color: white;
+}
+.active{
+    background: linear-gradient(to bottom, #7C4AF9, #572DBE);
+    box-shadow: 0 4px 8px rgba(55, 0, 117, 0.5);
+    color: white;
+}
+
+
+.custom-input,
+.custom-textarea {
+    background: #F8F8F8;
+    border: none;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.link{
+    color: #A3AAB8;
+    font-family: "Lato", serif;
+    font-size: 14px;
+    max-width: 350px;
+}
+
+.save-btn {
+    background: linear-gradient(to bottom, #7C4AF9, #572DBE);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    padding: 10px 40px;
+    box-shadow: 0 4px 8px rgba(55, 0, 117, 0.5);
+}
+
+.save-btn:hover{
+    background: white;
+    color: #572DBE;
+    border: 1px solid #572DBE;
+}
+
+.question-icon {
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 5px;
+    color: #494949;
+}
+
+.tooltip-box {
+    position: absolute;
+    background: rgb(173, 173, 173);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 8px;
+    display: none;
+    margin-top: 0;
+    z-index: 4;
+}
+
+.tooltip-box h6 {
+    font-weight: bold;
+}
+
+.btn-section {
+    gap: 15px; /* Reduce space between sections */
+    color: #A3AAB8;
+    flex-direction: row;
+}
+
+/* Toggle Item */
+.toggle-item {
+    text-align: left;
+}
+
+.toggle-item h6 {
+    margin-bottom: 10px;
+    font-family: "Lato", serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: #6B3DDE;
+}
+
+.skills-grid {
+    display: grid;
+    width: 80%;
+    margin: auto;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+}
+
+/* Toggle Styles */
+.toggle-container {
+    width: 80px;
+    height: 40px;
+    background: #ECECEC;
+    border-radius: 20px;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5px;
+    font-family: "Lato", serif;
+    font-size: 12px;
+    font-weight: bold;
+    color: #555;
+}
+
+.toggle-switch {
+    width: 30px;
+    height: 30px;
+    font-weight: bolder;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(117, 117, 117, 0.5);
+    color: #7C4AF9;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+}
+
+.toggle-container.toggle-active .toggle-switch {
+    left: calc(100% - 40px);
+    background: linear-gradient(to bottom, #7C4AF9, #572DBE);
+    box-shadow: 0 4px 8px rgba(55, 0, 117, 0.5);
+    color: #fff;
+}
+
+/* Initial Position */
+.toggle-switch {
+    left: 5px;
+}
+
+/* Button Group */
+.btn-group {
+    display: flex;
+}
+
+/* Pricing Buttons */
+.pricing-btn {
+    margin-right: 20px;
+    width: 150px;
+    padding: 8px 0;
+    background-color: #F8F8F8;
+    border: none;
+    border-radius: 5px;
+    color: #B4B4B4;
+    font-family: "Lato", serif;
+    font-size: 12px;
+    font-weight:900;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    text-transform: uppercase;
+}
+
+
+.pricing-btn:hover {
+    background: linear-gradient(to bottom, #7C4AF9, #572DBE);
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(55, 0, 117, 0.5);
+}
+
+.pricing-btn.selected {
+    background: linear-gradient(to bottom, #7C4AF9, #572DBE);
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(55, 0, 117, 0.5);
+}
+
+.bidding-box {
+    border-radius: 15px;
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.bidding-content {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.bidding-left-column {
+    width: 70%;
+    padding: 50px;
+}
+
+
+.bidding-heading {
+    font-family: 'Raleway', serif;
+    font-weight: 800;
+    font-size: 24px;
+    color: #494949;
+    margin-bottom: 15px;
+}
+
+.bidding-paragraph {
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    color: #B4B4B4;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.start-bid-btn {
+    font-family: 'Lato', sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    background: linear-gradient(to bottom, #7C4AF9, #572DBE);
+    box-shadow: 0 4px 8px rgba(55, 0, 117, 0.5);
+    color: white;
+    border-radius: 5px;
+    padding: 15px 50px;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.start-bid-btn:hover{
+    background: white;
+    color: #7C4AF9;
+    border: 2px solid #7C4AF9;
+    box-shadow: 0 4px 8px rgba(55, 0, 117, 0.5);
+}
+
+.bidding-note {
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    color: #B4B4B4;
+}
+
+.bidding-right-column {
+    width: 600px;
+    background: url('../assets/bg.png'), linear-gradient(to bottom, #7C4AF9, #572DBE);
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+    border-radius: 0px 15px 15px 0px;
+}
+
+.bidding-stat {
+    width: 80%;
+    margin: 20px 0px 20px 10%;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+.bidding-stat p{
+    margin: 0;
+}
+
+.bidding-circle {
+    background-color: #3A2480;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    margin-right: 15px;
+}
+
+.bidding-number {
+    color: white;
+    font-family: 'Raleway', serif;
+    font-weight: 800;
+    font-size: 28px;
+}
+
+.bidding-text {
+    font-family: 'Lato', sans-serif;
+    font-weight: 900;
+    font-size: 18px;
+    color: white;
+}
+
+.review-img{
+    width: 20px;
+    height: 20px !important;
+}
+
+.pagination {
+    margin-top: 30px;
+    display: flex;
+    gap: 8px;
+}
+
+.pagination-arrow img {
+    width: 18px; /* Adjust size of arrow icons */
+    height: 18px;
+    cursor: pointer;
+}
+
+.pagination-number {
+    font-family: 'Lato', sans-serif;
+    font-size: 12px;
+    color: #D9D9D9;
+    padding: 7px 12px;
+    border-radius: 50%;
+    background: transparent;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.pagination-number:hover {
+    color: #FFFFFF;
+    background: #7C4AF9;
+}
+
+.pagination-number.selected {
+    background: #7C4AF9;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 1000px){
+    .bidding-content{
+        flex-direction: column;
+    }
+
+    .bidding-left-column{
+        width: 100%;
+    }
+
+    .bidding-right-column{
+        width: 100%;
+        border-radius: 0px 0px 15px 15px;
+    }
+}
+
+
+@media screen and (max-width: 615px){
+    .btn-section{
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .skills-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .bidding-right-column{
+        padding: 20px;
+    }
+
+    .bidding-circle{
+        width: 50px;
+        height: 50px;
+    }
+
+    .bidding-number{
+        font-size: 20px;
+    }
+
+    .bidding-stat{
+        width: 95%;
+        margin: 10px auto;
+    }
+
+    .bidding-text{
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 415px){
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .btn-group {
+        flex-direction: column;
+        width: 180px !important;
+        margin: 0px auto 20px auto;
+    }
+
+    .pricing-btn{
+        margin-bottom: 20px;
+    }
+
+    .pricing-row{
+        width: 180px;
+        margin: auto;
+    }
+
+    .p-title{
+        max-width: 280PX;
+    }
+
+    .start-bid-btn{
+        font-size: 14px;
+        padding: 15px 30px;
+    }
+}

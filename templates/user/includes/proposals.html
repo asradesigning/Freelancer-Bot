@@ -1,0 +1,145 @@
+<div class="p-5">
+    <div class="table-container py-5">
+        <h2 class="fw-bold text-uppercase">Submitted Proposals</h2>
+        <!-- Add the table-responsive wrapper -->
+        <div class="table-responsive mt-5">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <!-- Adding vertical padding to <th> elements -->
+                        <th class="text-truncate py-3">Project</th>
+                        <th class="text-truncate py-3">Time to Bid</th>
+                        <!-- <th class="text-truncate py-3">Bid Rank</th> -->
+                        <th class="text-truncate py-3">Amount</th>
+                        <th class="text-truncate py-3">Client Information</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for bid in bids %}
+                    {% for project_id, project_data in project_details %}
+                        {% if project_data.get('id') == bid.project_id %}
+                            {% set project_submit_time = project_data.get('time_submitted') %}
+                            {% set bid_submit_time = bid.get('submitdate') %}
+                            {% if project_submit_time and bid_submit_time %}
+                                {% set time_diff_seconds = bid_submit_time - project_submit_time %}
+                                
+                                {% if time_diff_seconds < 60 %}
+                                    {% set time_diff = time_diff_seconds ~ ' seconds' %}
+                                {% elif time_diff_seconds < 3600 %}
+                                    {% set minutes = time_diff_seconds // 60 %}
+                                    {% set seconds = time_diff_seconds % 60 %}
+                                    {% set time_diff = minutes ~ 'm, ' ~ seconds ~ 's' %}
+                                {% elif time_diff_seconds < 86400 %}
+                                    {% set hours = time_diff_seconds // 3600 %}
+                                    {% set minutes = (time_diff_seconds % 3600) // 60 %}
+                                    {% set time_diff = hours ~ 'h, ' ~ minutes ~ 'm' %}
+                                {% elif time_diff_seconds < 604800 %}
+                                    {% set days = time_diff_seconds // 86400 %}
+                                    {% set time_diff = days ~ ' days' %}
+                                {% elif time_diff_seconds < 2592000 %}
+                                    {% set weeks = time_diff_seconds // 604800 %}
+                                    {% set time_diff = weeks ~ ' weeks' %}
+                                {% elif time_diff_seconds < 31536000 %}
+                                    {% set months = time_diff_seconds // 2592000 %}
+                                    {% set time_diff = months ~ ' months' %}
+                                {% else %}
+                                    {% set years = time_diff_seconds // 31536000 %}
+                                    {% set time_diff = years ~ ' years' %}
+                                {% endif %}
+                            {% else %}
+                                {% set time_diff = 'N/A' %}
+                            {% endif %}
+                            {% for user_id, user_data in owner %}
+                                {% if user_data.get('id') == bid.get("project_owner_id") %}
+                                    {% set flag = user_data.get('location').get('country').get('highres_flag_url_cdn') %}
+                                    {% if flag %}
+                                        {% set reputation = user_data.get('employer_reputation') %}
+                                        {% set overall = reputation.entire_history.overall %}
+                                        {% set reviews = reputation.entire_history.reviews %}
+                                        <tr>
+                                            <td class="text-truncate py-3 p-title">{{ project_data.get('title') }}</td>
+                                            <td class="text-truncate py-3">{{ time_diff }}</td>
+                                            <td class="amount text-truncate py-3">{{ project_data.get('currency').get('sign') }}{{ bid.get('amount') }}</td>
+                                            <td class="text-truncate py-3">
+                                    
+                                                
+                                                <div class="client-info">
+                                                    <img src="{{ flag }}" alt="Country Icon">
+                                                    <i class="fa fa-star star"></i>
+                                                    <span>{{overall|round(1)}}</span>
+                                                    <img class="review-img" src="../../static/assets/rank.svg" alt="Country Icon">
+                                                    <span>{{ reviews if reviews else "0" }}</span>
+                                                </div>
+                                            
+
+                                        </tr>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}        
+                {% endfor %}
+                   
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="pagination d-flex justify-content-center align-items-center">
+        <!-- Previous Arrow -->
+        {% if current_page > 1 %}
+            <a href="?page={{ current_page - 1 }}" class="pagination-arrow">
+                <img src="../../../static/assets/pre.svg" alt="Previous" />
+            </a>
+        {% endif %}
+    
+        <!-- Pagination Numbers -->
+        {% for page_num in range(current_page - 2, current_page + 3) %}
+            {% if page_num > 0 and page_num <= total_pages %}
+                {% if page_num == current_page %}
+                    <span class="pagination-number selected">{{ page_num }}</span>
+                {% else %}
+                    <a href="?page={{ page_num }}" class="pagination-number">{{ page_num }}</a>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    
+        <!-- Next Arrow -->
+        {% if current_page < total_pages %}
+            <a href="?page={{ current_page + 1 }}" class="pagination-arrow">
+                <img src="../../../static/assets/for.svg" alt="Next" />
+            </a>
+        {% endif %}
+    </div>
+</div>
+
+ <!-- <tr>
+                        <td class="text-truncate py-3 p-title">Backend Developer for E-Commerce Platform</td>
+                        <td class="text-truncate py-3">1h, 20m</td>
+                        <td class="text-truncate py-3">#3 of 12 bids</td>
+                        <td class="amount text-truncate py-3">$4800</td>
+                        <td class="text-truncate py-3">
+                            <div class="client-info">
+                                <img src="https://via.placeholder.com/20" alt="Country Icon">
+                                <i class="fa fa-star star"></i>
+                                <span>4.8</span>
+                                <i class="fa fa-tachometer-alt icon-dashboard"></i>
+                                <span>55</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-truncate py-3 p-title">Mobile App Developer for Food Delivery App</td>
+                        <td class="text-truncate py-3">30m, 10s</td>
+                        <td class="text-truncate py-3">#2 of 18 bids</td>
+                        <td class="amount text-truncate py-3">$7200</td>
+                        <td class="text-truncate py-3">
+                            <div class="client-info">
+                                <img src="https://via.placeholder.com/20" alt="Country Icon">
+                                <i class="fa fa-star star"></i>
+                                <span>5.0</span>
+                                <i class="fa fa-tachometer-alt icon-dashboard"></i>
+                                <span>100</span>
+                            </div>
+                        </td>
+                    </tr> -->
+                    

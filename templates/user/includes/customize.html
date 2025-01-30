@@ -1,0 +1,117 @@
+<div class="px-5">
+    <div class="accordion" id="customAccordion">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="customizeExperienceHeading">
+                <button class="accordion-button collapsed text-uppercase" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#customizeExperience" aria-expanded="true" aria-controls="customizeExperience">
+                    Customize Experience
+                    <i class="fa fa-question-circle question-icon" id="customizeTooltipTrigger"></i>
+                </button>
+            </h2>
+            <form action="/customize" method="post">
+            <div id="customizeExperience" class="accordion-collapse collapse"
+                aria-labelledby="customizeExperienceHeading">
+                <div class="accordion-body py-5">
+                    <!-- Buttons Section -->
+                    <div class="d-flex mb-4 btn-section">
+                        <div class="text-left me-4">
+                            <h6>Client Name:</h6>
+                            {% if proposal %}
+                                {% if proposal.client == True %}
+                                <button type="button" name="Client" class="on-btn active">ON</button>
+                                <button type="button" name="Client" class="off-btn">OFF</button>
+                                <input type="hidden" name="client" id="client" value="ON">
+                                {% else %}
+                                <button type="button" name="Client" class="on-btn">ON</button>
+                                <button type="button" name="Client" class="off-btn active">OFF</button>
+                                <input type="hidden" name="client" id="client" value="OFF">
+                                {% endif %}
+                            {% else %}
+                                <button type="button" name="Client" class="on-btn">ON</button>
+                                <button type="button" name="Client" class="off-btn active">OFF</button>
+                                <input type="hidden" name="client" id="client" value="OFF">
+                            {% endif %}
+                        </div>
+                        <div class="text-left me-4">
+                            <h6>Your Name:</h6>
+                            {% if proposal %}
+                                {% if proposal.user == True %}
+                                <button type="button" name="User" class="on-btn active">ON</button>
+                                <button type="button" name="User" class="off-btn">OFF</button>
+                                <input type="hidden" name="user" id="user" value="ON">
+                                {% else %}
+                                <button type="button" name="User" class="on-btn">ON</button>
+                                <button type="button" name="User" class="off-btn active">OFF</button>
+                                <input type="hidden" name="user" id="user" value="OFF">
+                                {% endif %}
+                            {% else %}
+                                <button type="button" name="User" class="on-btn">ON</button>
+                                <button type="button" name="User" class="off-btn active">OFF</button>
+                                <input type="hidden" name="user" id="user" value="OFF">
+                            {% endif %}
+                        </div>
+                        <div class="text-left me-4">
+                            <h6>Sealed Bid:</h6>
+                            {% if proposal %}
+                                {% if proposal.sealed == True %}
+                                <button type="button" name="Sealed" class="on-btn active">ON</button>
+                                <button type="button" name="Sealed" class="off-btn">OFF</button>
+                                <input type="hidden" name="sealed" id="sealed" value="ON">
+                                {% else %}
+                                <button type="button" name="Sealed" class="on-btn">ON</button>
+                                <button type="button" name="Sealed" class="off-btn active">OFF</button>
+                                <input type="hidden" name="sealed" id="sealed" value="OFF">
+                                {% endif %}
+                            {% else %}
+                                <button type="button" name="Sealed" class="on-btn">ON</button>
+                                <button type="button" name="Sealed" class="off-btn active">OFF</button>
+                                <input type="hidden" name="sealed" id="sealed" value="OFF">
+                            {% endif %}
+                        </div>
+                    </div>
+                    <!-- Text Area Section -->
+                    <div class="mb-4">
+                        <h6>Intro:</h6>
+                        <textarea name="intro" id="intro" class="form-control custom-textarea" rows="6"
+                        placeholder="Write your introduction here..." maxlength="250"
+                        oninput="updateCharCount()">{% if proposal and proposal.intro %}{{ proposal.intro }}{% endif %}</textarea>
+                        <p id="charCount" class="text-secondary">0 / 250</p>
+                    </div>
+                    <!-- Input Section -->
+                    <div class="mb-4">
+                        <h6>Important Links:</h6>
+                        <div class="input-group">
+                            <input type="text" class="form-control custom-input" id="add-link-input" placeholder="Add Links here">
+                            <button type="button" class="save-btn" id="add-link">Add</button>
+                        </div>
+                    </div>
+                    <!-- Save Button -->
+                    <div class="row justify-content-between">
+                        <!-- Links Box -->
+                        <div class="col-12 col-md-8 links-box" id="link-box">
+                            {% if proposal and proposal.links %}
+                                {% for link in proposal.links %}
+                                    <div class="link text-truncate">{{ link }}</div>
+                                {% endfor %}
+                                <input type="hidden" name="all-links" id="all-links" value="{{ proposal.links | join(', ') }}, ">
+                            {% else %}
+                                <input type="hidden" name="all-links" id="all-links">
+                            {% endif %}
+                        </div>
+                    
+                        <!-- Save Button -->
+                        <div class="col-12 col-md-3 text-md-end mt-3 mt-md-0">
+                            <button type="submit" name="customize" class="save-btn">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+    <!-- Tooltip -->
+    <div class="tooltip-box" id="customizeTooltipBox">
+        <h6>How to Use Bids Customization:</h6>
+        <p>Toggle the settings for customization. Add your intro and important links, then save your changes.</p>
+    </div>
+</div>

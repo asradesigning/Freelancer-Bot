@@ -1,0 +1,71 @@
+<div class="px-5 ">
+    <div class="accordion" id="pricingAccordion">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="setPricingHeading">
+                <button class="accordion-button collapsed text-uppercase" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#setPricing" aria-expanded="false" aria-controls="setPricing">
+                    Set Pricing
+                    <i class="fa fa-question-circle question-icon" id="priceTooltipTrigger"></i>
+                </button>
+            </h2>
+            <div id="setPricing" class="accordion-collapse collapse" aria-labelledby="setPricingHeading">
+                <div class="accordion-body py-5">
+                    <!-- Fixed Project Section -->
+                    <div class="row">
+                        <div class="col-md-6 pricing-row">
+                            <h6>Fixed Project:</h6>
+                            <div class="btn-group mt-4 mb-4 w-100">
+                                <form action="/update-pricing" method="post">
+                                    {% if price.fixed == "lowest" %}
+                                        <button type="button" class="pricing-btn selected" data-state="lowest">Lowest</button>
+                                        <button type="button" class="pricing-btn" data-state="mid">Mid</button>
+                                        <button type="button" class="pricing-btn" data-state="highest">Highest</button>
+                                    {% elif price.fixed == "mid" %}
+                                        <button type="button" class="pricing-btn" data-state="lowest">Lowest</button>
+                                        <button type="button" class="pricing-btn selected" data-state="mid">Mid</button>
+                                        <button type="button" class="pricing-btn" data-state="highest">Highest</button>
+                                    {% elif price.fixed == "highest" %}
+                                        <button type="button" class="pricing-btn" data-state="lowest">Lowest</button>
+                                        <button type="button" class="pricing-btn" data-state="mid">Mid</button>
+                                        <button type="button" class="pricing-btn selected" data-state="highest">Highest</button>
+                                    {% endif %}
+                                    <input type="hidden" name="Fixed" id="fixed-price" value="{{ price.fixed }}">
+                                </form>                                
+                            </div>
+                        </div>
+                        <div class="col-md-6 pricing-row">
+                            <h6>Hourly Project:</h6>
+                            <div class="btn-group mt-4 mb-4 w-100">
+                                <form action="/update-pricing" method="post">
+                                    {% if price.hourly == "lowest" %}
+                                        <button type="button" class="pricing-btn selected" data-state="lowest">Lowest</button>
+                                        <button type="button" class="pricing-btn" data-state="mid">Mid</button>
+                                        <button type="button" class="pricing-btn" data-state="highest">Highest</button>
+                                    {% elif price.hourly == "mid" %}
+                                        <button type="button" class="pricing-btn" data-state="lowest">Lowest</button>
+                                        <button type="button" class="pricing-btn selected" data-state="mid">Mid</button>
+                                        <button type="button" class="pricing-btn" data-state="highest">Highest</button>
+                                    {% elif price.hourly == "highest" %}
+                                        <button type="button" class="pricing-btn" data-state="lowest">Lowest</button>
+                                        <button type="button" class="pricing-btn" data-state="mid">Mid</button>
+                                        <button type="button" class="pricing-btn selected" data-state="highest">Highest</button>
+                                    {% endif %}
+                                    <input type="hidden" name="Hourly" id="hourly-price" value="{{ price.hourly }}">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Save Button -->
+                    <!-- <div class="text-end">
+                        <button class="save-btn">Save</button>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+     <!-- Tooltip -->
+     <div class="tooltip-box" id="priceTooltipBox">
+        <h6>How to Use Prices:</h6>
+        <p>Toggle the settings for customization. Add your intro and important links, then save your changes.</p>
+    </div>
+</div>

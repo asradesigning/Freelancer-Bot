@@ -1,0 +1,22 @@
+<nav class="navbar navbar-expand-lg bg-light shadow-sm px-4">
+    <div class="container-fluid">
+        <!-- Logo -->
+        <a class="navbar-brand" href="/">
+            <img src="../../../static/assets/logo.png" alt="Logo" height="80">
+        </a>
+
+        <!-- User Box (Always visible) -->
+        <div class="d-flex align-items-center order-lg-2">
+            <div class="user-box">
+                <span class="d-none d-md-block text-sm-start fw-bold">{{ user_details.username }}</span>
+                <img src="{{ user_details.avatar_cdn }}" alt="User Image">
+                <!-- <span class="hamburger">
+                    <i class="fa-solid fa-bars"></i>
+                </span> -->
+            </div>
+        </div>
+
+
+
+    </div>
+</nav>
