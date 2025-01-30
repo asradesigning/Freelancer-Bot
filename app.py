@@ -14,7 +14,14 @@ app = Flask(__name__)
 app.secret_key = "secret"
 import json
 login_manager = LoginManager()
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://doadmin:AVNS_sHCfxWNrQhG4sj_jF6Y@db-mysql-bot-do-user-18941393-0.d.db.ondigitalocean.com/db-mysql-bot'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://doadmin:AVNS_sHCfxWNrQhG4sj_jF6Y@db-mysql-bot-do-user-18941393-0.d.db.ondigitalocean.com:25060/defaultdb?ssl-mode=REQUIRED'
+app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
+    'connect_args': {
+        'ssl': {
+            'ca': '/ca-certificate.crt',
+        }
+    }
+}
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['CELERY_RESULT_BACKEND'] = "redis://localhost:6379/0"
 app.config['CELERY_BROKER_URL'] = "redis://localhost:6379/0"
