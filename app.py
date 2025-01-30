@@ -73,15 +73,15 @@ def bidding_start():
 @login_required
 def dashboard(): 
     # Fetch project details and bids from your function
-    if(int(current_user.membership_time.timestamp()) < int(datetime.now(timezone.utc).timestamp())):
-        bidding_status = Bidding.query.filter_by(user_id=current_user.id).first()
-        bidding_status.is_bidding = "stopped"
-        task = bidding.AsyncResult(bidding_status.task)
-        task.abort()
-        bidding_status.task = ""
-        db.session.add(bidding_status)
-        db.session.commit()
-        return redirect('/logout')
+    # if(int(current_user.membership_time.timestamp()) < int(datetime.now(timezone.utc).timestamp())):
+    #     bidding_status = Bidding.query.filter_by(user_id=current_user.id).first()
+    #     bidding_status.is_bidding = "stopped"
+    #     task = bidding.AsyncResult(bidding_status.task)
+    #     task.abort()
+    #     bidding_status.task = ""
+    #     db.session.add(bidding_status)
+    #     db.session.commit()
+    #     return redirect('/logout')
     
     bidding_status = get_bidding_status(current_user.id)
     proposal = get_customize_bid(current_user.id)
