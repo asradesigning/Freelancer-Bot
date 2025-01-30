@@ -15,6 +15,7 @@ app.secret_key = "secret"
 import json
 login_manager = LoginManager()
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://doadmin:AVNS_sHCfxWNrQhG4sj_jF6Y@db-mysql-bot-do-user-18941393-0.d.db.ondigitalocean.com:25060/defaultdb'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:1234@localhost:3306/bot'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['CELERY_RESULT_BACKEND'] = "redis://localhost:6379/0"
 app.config['CELERY_BROKER_URL'] = "redis://localhost:6379/0"
@@ -30,12 +31,10 @@ app.register_blueprint(admin_bp)
 
 @celery.task(bind=True, base=AbortableTask)
 def bidding(self, user_id):
-    print(user_id)
     with app.app_context():
                
         user = Users.query.filter_by(id=user_id).first()
         for i in range(86400):
-            print(f"Searching Projects for {user.username}")
             projects = get_projects(user_id)
             sorted_projects = sorted(projects, key=lambda p: p.get('time_diff', float('inf')))
             for project in sorted_projects:
@@ -46,7 +45,7 @@ def bidding(self, user_id):
                     break
             sleep(60)
             if self.is_aborted():
-                return print(f"Bidding Stopped for {user.username}")
+                return
         return f"Bidding Completed for {user.username}"
     return
 
@@ -58,7 +57,6 @@ def bidding_start():
     if status == "bidding":
         bidding_status.is_bidding = "bidding"
         task = bidding.apply_async(args=[current_user.id])
-        print(task.id)
         bidding_status.task = task
     elif status == "stopped":
         bidding_status.is_bidding = "stopped"
@@ -75,12 +73,13 @@ def dashboard():
     # Fetch project details and bids from your function
     if(int(current_user.membership_time.timestamp()) < int(datetime.now(timezone.utc).timestamp())):
         bidding_status = Bidding.query.filter_by(user_id=current_user.id).first()
-        bidding_status.is_bidding = "stopped"
-        task = bidding.AsyncResult(bidding_status.task)
-        task.abort()
-        bidding_status.task = ""
-        db.session.add(bidding_status)
-        db.session.commit()
+        if bidding_status.is_bidding == "bidding":
+            bidding_status.is_bidding = "stopped"
+            task = bidding.AsyncResult(bidding_status.task)
+            task.abort()
+            bidding_status.task = ""
+            db.session.add(bidding_status)
+            db.session.commit()
         return redirect('/logout')
     
     bidding_status = get_bidding_status(current_user.id)
@@ -136,7 +135,6 @@ def Set_Skills(user_id):
         # Add new jobs from user_details that are not in current_skills
         for job in user_details.get('jobs', []):
             if job.get('id') not in current_skills:
-                print(f"Adding skill: {job.get('name')}")
                 jobs.append({
                     "id": job.get('id'),
                     "name": job.get('name'),
@@ -146,7 +144,6 @@ def Set_Skills(user_id):
         # Remove skills from the jobs list that are not in user_details jobs
         for skill in skills.skills:
             if not any(job['id'] == skill['id'] for job in user_details.get('jobs', [])):
-                print(f"Removing skill: {skill['name']}")
                 jobs = [job for job in jobs if job['id'] != skill['id']]
 
         
@@ -194,9 +191,6 @@ def bid_customize():
             
         db.session.add(customize)
         db.session.commit()
-        print(Client)
-        print(User)
-        print(Sealed)
         
         return redirect('/dashboard')
     else:
@@ -210,14 +204,12 @@ def update_skills():
     temp_skills = []
     skills_record = Skills.query.filter_by(user_id=current_user.id).first()
     for skill in skills_record.skills:
-        print(skill["name"])
         if skill["name"] == skill_name:
             temp_skills.append({
                 "id": skill["id"],
                 "name": skill["name"],
                 "status": status
             })
-            print("changing status")
         else:
             temp_skills.append({
                 "id": skill["id"],

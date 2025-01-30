@@ -186,12 +186,24 @@ body {
     padding: 20px;
 }
 
+.link-wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.remove-link{
+    color: gray;
+    border: none;
+}
+
 .link{
     color: #A3AAB8;
     font-family: "Lato", serif;
     font-size: 14px;
     max-width: 350px;
 }
+
 
 .save-btn {
     background: linear-gradient(to bottom, #7C4AF9, #572DBE);
@@ -234,7 +246,8 @@ body {
 .btn-section {
     gap: 15px; /* Reduce space between sections */
     color: #A3AAB8;
-    flex-direction: row;
+    /* flex-direction: row; */
+    flex-wrap: wrap;
 }
 
 /* Toggle Item */
@@ -307,16 +320,27 @@ body {
     left: 5px;
 }
 
-/* Button Group */
-.btn-group {
+.pricing-row{
+    width: 600px;
+    margin: auto;
+}
+
+.btn-group{
+    width: 100%;
+}
+
+
+.btn-group form{
+    width: 100%;
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 /* Pricing Buttons */
 .pricing-btn {
-    margin-right: 20px;
+    padding: 8px 0px;
     width: 150px;
-    padding: 8px 0;
     background-color: #F8F8F8;
     border: none;
     border-radius: 5px;
@@ -513,9 +537,14 @@ body {
 
 
 @media screen and (max-width: 615px){
-    .btn-section{
-        flex-direction: column;
-        text-align: center;
+
+    .px-5, .p-5{
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+
+    .me-4{
+        margin-right: 0 !important;
     }
 
     .skills-grid {
@@ -542,6 +571,25 @@ body {
 
     .bidding-text{
         font-size: 14px;
+    }
+
+    .btn-group {
+        flex-direction: column;
+        width: 180px !important;
+        margin: 0px auto 20px auto;
+    }
+
+    .pricing-btn{
+        margin-bottom: 20px;
+    }
+
+    .pricing-row{
+        width: 180px;
+        margin: auto;
+    }
+
+    .accordion-button{
+        font-size: 0.8rem;
     }
 }
 

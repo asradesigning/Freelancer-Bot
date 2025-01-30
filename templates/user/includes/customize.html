@@ -91,7 +91,10 @@
                         <div class="col-12 col-md-8 links-box" id="link-box">
                             {% if proposal and proposal.links %}
                                 {% for link in proposal.links %}
-                                    <div class="link text-truncate">{{ link }}</div>
+                                    <div class="link-wrapper d-flex align-items-center">
+                                        <button class="me-2 remove-link">×</button>
+                                        <div class="link text-truncate">{{ link }}</div>
+                                    </div>
                                 {% endfor %}
                                 <input type="hidden" name="all-links" id="all-links" value="{{ proposal.links | join(', ') }}, ">
                             {% else %}

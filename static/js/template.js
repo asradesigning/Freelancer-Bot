@@ -117,22 +117,33 @@ addLinkButton.addEventListener('click', function () {
     // Exit if the input is empty
     if (addLinkInput.value == "") return;
 
-    if (linkBox.children.length === 10) {
+    if (linkBox.children.length === 11) {
         alert("Only 10 links can be added");
         return;
     }    
 
-    // Add the new link to the linkBox
-    const tag = document.createElement('div');
-    tag.classList.add("link");
-    tag.classList.add("text-truncate");
-    tag.innerText = linkValue;
-    console.log(tag)
-    linkBox.appendChild(tag);
+    const linkWrapper = document.createElement('div');
+    linkWrapper.classList.add('link-wrapper');
+    linkWrapper.classList.add('d-flex');
+    linkWrapper.classList.add('align-items-center');
+
+    const linkClose = document.createElement('button');
+    linkClose.classList.add('me-2');
+    linkClose.classList.add('remove-link');
+    linkClose.innerText = '×';
+
+    const linkDiv = document.createElement('div');
+    linkDiv.classList.add("link");
+    linkDiv.classList.add("text-truncate");
+    linkDiv.innerText = linkValue;
+
+    linkWrapper.appendChild(linkClose);
+    linkWrapper.appendChild(linkDiv);
+
+
+    linkBox.appendChild(linkWrapper);
     linksInput.value += linkValue + ", ";
 
-
-    // Clear the input field
     addLinkInput.value = '';
 })
 
@@ -158,3 +169,21 @@ function updateCharCount() {
     const charCount = document.getElementById("charCount");
     charCount.textContent = textarea.value.length + " / 250";
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("click", function (event) {
+        if (event.target.classList.contains("remove-link")) {
+            let wrapper = event.target.closest(".link-wrapper");
+            let linkText = wrapper.querySelector(".link").innerText.trim();
+            
+            // Remove link from the hidden input
+            let allLinksInput = document.getElementById("all-links");
+            let linksArray = allLinksInput.value.split(", ");
+            linksArray = linksArray.filter(link => link.trim() !== linkText);
+            allLinksInput.value = linksArray.join(", ");
+
+            // Remove the wrapper div
+            wrapper.remove();
+        }
+    });
+});

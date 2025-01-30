@@ -94,8 +94,6 @@ def authorized():
 
     session["access_token"] = (resp["access_token"],)
     session["refresh_token"] = (resp["refresh_token"],)
-    print(resp["expires_in"])
-    print(resp["token_type"])
     freelancer_user_info = get_freelancer_user_info()
     if freelancer_user_info:
         user = Users.query.filter_by(user_id=freelancer_user_info.get('id')).first()
@@ -118,7 +116,6 @@ def register():
     
     register_form = CreateAccountForm(request.form)
     if 'register' in request.form:
-        print('submitting form')
         email = request.form['email']
         passw = request.form['password']
         user = Users.query.filter_by(email=email).first()
@@ -166,7 +163,6 @@ def get_user():
     }
     res = requests.get(api_url, headers=headers, params=params, verify=True)
     if res.status_code == 200:
-        print(res.json().get("result"))
         return res.json().get("result")
     return None
 
@@ -239,7 +235,6 @@ def refresh_token():
     """Uses the current refresh token to get a new OAuth access token."""
     user_id = session["user_id"]
     user = Users.query.filter_by(user_id=user_id).first()
-    print(user_id)
     url = 'https://accounts.freelancer-sandbox.com/oauth/token'
     payload = {
     'grant_type': 'refresh_token',
