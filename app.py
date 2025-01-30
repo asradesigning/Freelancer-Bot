@@ -3,6 +3,7 @@ from __oauth__ import oauth_bp, get_user, get_projects_with_bids, get_customize_
 from admin import admin_bp
 from extensions import db, oauth  # Import from extensions
 import pymysql
+import gunicorn
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, login_required, current_user
 from models import Users, Customize, Skills, Pricing, Bidding
