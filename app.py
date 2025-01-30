@@ -16,7 +16,7 @@ app = Flask(__name__)
 app.secret_key = "secret"
 import json
 login_manager = LoginManager()
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://doadmin:AVNS_sHCfxWNrQhG4sj_jF6Y@db-mysql-bot-do-user-18941393-0.d.db.ondigitalocean.com:25060/defaultdb?ssl-mode=REQUIRED'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://doadmin:AVNS_sHCfxWNrQhG4sj_jF6Y@db-mysql-bot-do-user-18941393-0.d.db.ondigitalocean.com:25060/defaultdb'
 app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
     'connect_args': {
         'ssl': {
