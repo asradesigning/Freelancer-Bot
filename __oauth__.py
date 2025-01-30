@@ -105,7 +105,7 @@ def authorized():
             user.refresh_token = session["refresh_token"]
             db.session.add(user)
             db.session.commit()
-            return redirect("/")
+            return redirect(url_for('oauthBP.login'))
         session["redirected_to_register"] = True
         session["user_id"] = freelancer_user_info.get('id')
         session["username"] = freelancer_user_info.get('username')
