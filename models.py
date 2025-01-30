@@ -15,6 +15,7 @@ class Users(db.Model, UserMixin):
     access_token = db.Column(db.String(255), nullable=False)
     refresh_token = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(100), nullable=False, unique=True)
+    phone = db.Column(db.String(100), nullable=True)
     password = db.Column(db.LargeBinary)
     membership_time = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc) + timedelta(days=7))
 
