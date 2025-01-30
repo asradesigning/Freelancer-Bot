@@ -106,7 +106,6 @@ def authorized():
             db.session.add(user)
             db.session.commit()
             return redirect(url_for('oauthBP.login'))
-        session["redirected_to_register"] = True
         session["user_id"] = freelancer_user_info.get('id')
         session["username"] = freelancer_user_info.get('username')
         return redirect(url_for("oauthBP.register"))
@@ -116,11 +115,6 @@ def authorized():
 @oauth_bp.route('/register', methods=["GET", "POST"])
 def register():
     
-    if not session.get("redirected_to_register"):
-        return redirect("/register-freelancer")  # Redirect to login or another appropriate route
-    
-    # Clear the flag after the first access to prevent reuse
-    session.pop("redirected_to_register", None)
     
     register_form = CreateAccountForm(request.form)
     if 'register' in request.form:
@@ -143,7 +137,7 @@ def register():
             )
         db.session.add(user)
         db.session.commit()
-        return redirect('/')
+        return redirect(url_for('oauthBP.login'))
     
     return render_template("/user/register.html", form=register_form)
 
