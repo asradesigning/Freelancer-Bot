@@ -195,7 +195,7 @@ def get_customize_bid(user_id):
     proposal = Customize.query.filter_by(user_id=user_id).first()
     if proposal and proposal.user_id:
         return proposal
-    proposal = Customize(user_id=user_id, client=False, User=False, sealed=False, intro="", links=[])
+    proposal = Customize(user_id=user_id, client=False, user=False, sealed=False, intro="", links=[])
     db.session.add(proposal)
     db.session.commit()
     return proposal
