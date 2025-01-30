@@ -2,7 +2,7 @@ from flask import Flask, render_template, redirect, request, jsonify, current_ap
 from __oauth__ import oauth_bp, get_user, get_projects_with_bids, get_customize_bid, set_pricing, get_bidding_status
 from admin import admin_bp
 from extensions import db, oauth  # Import from extensions
-import MySQLdb
+import pymysql
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, login_required, current_user
 from models import Users, Customize, Skills, Pricing, Bidding
@@ -15,7 +15,7 @@ app = Flask(__name__)
 app.secret_key = "secret"
 import json
 login_manager = LoginManager()
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://doadmin:AVNS_sHCfxWNrQhG4sj_jF6Y@db-mysql-bot-do-user-18941393-0.d.db.ondigitalocean.com:25060/defaultdb?ssl-mode=REQUIRED'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://doadmin:AVNS_sHCfxWNrQhG4sj_jF6Y@db-mysql-bot-do-user-18941393-0.d.db.ondigitalocean.com:25060/defaultdb?ssl-mode=REQUIRED'
 app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
     'connect_args': {
         'ssl': {
